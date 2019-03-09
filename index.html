@@ -12,17 +12,28 @@
         const $body = $('body');
         $body.html('');
 
-        let index = streams.home.length - 1;
-        let lastUpdate = streams.home.length;
-        while(index >= 0){
-          const tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+        for (let i = 0; i<streams.home.length; i++){
+          const tweet = streams.home[i];
+          const $tweet = $('<div></div>');
           $tweet.html(`<p>@${tweet.user}: ${tweet.message}</p>
           <span>${tweet.created_at.toLocaleString()}</span>`);
           $tweet.addClass('tweetDiv')
           $tweet.appendTo($body);
-          index -= 1;
         }
+
+        let update = true;
+        let lastUpdate = streams.home.length;
+        const renderNewTweets = ()=>{
+          let currTweets = streams.home;
+          if(currTweets.length > lastUpdate){
+            let newTweets = currTweets.slice(lastUpdate);
+            console.log(newTweets);
+          }
+        }
+        if(update === true){
+          setInterval(renderNewTweets, 1500); //checks for new tweets every 1.5 seconds
+        }
+
         
       });
     </script>
