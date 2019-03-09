@@ -8,20 +8,22 @@
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
+        const $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
+        let index = streams.home.length - 1;
+        let lastUpdate = streams.home.length;
         while(index >= 0){
-          var tweet = streams.home[index];
+          const tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.html(`<p>@${tweet.user}: ${tweet.message}</p>
+          <span>${tweet.created_at.toLocaleString()}</span>`);
+          $tweet.addClass('tweetDiv')
           $tweet.appendTo($body);
           index -= 1;
         }
-
+        
       });
-
     </script>
   </body>
 </html>
