@@ -1,0 +1,18 @@
+body {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+}
+
+.tweetDiv{
+    background: lightblue;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+
+}
+.tweetDiv p{
+    margin: 0 0 5px 0;
+}
+.tweetDiv span{
+    font-size: .8em;
+}
