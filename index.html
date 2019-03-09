@@ -6,33 +6,46 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
+    <button id="updateToggle">Stop Stream</button>
+    <div id="body"></div>
     <script>
 
       $(document).ready(function(){
-        const $body = $('body');
+        const $body = $('#body');
         $body.html('');
 
-        for (let i = 0; i<streams.home.length; i++){
-          const tweet = streams.home[i];
-          const $tweet = $('<div></div>');
-          $tweet.html(`<p>@${tweet.user}: ${tweet.message}</p>
-          <span>${tweet.created_at.toLocaleString()}</span>`);
-          $tweet.addClass('tweetDiv')
-          $tweet.appendTo($body);
+        const renderTweets= (array)=>{
+          for (let i = 0; i<array.length; i++){
+            const tweet = array[i];
+            const $tweet = $('<div></div>');
+            $tweet.html(`<p>@${tweet.user}: ${tweet.message}</p>
+            <span>${tweet.created_at.toLocaleString()}</span>`);
+            $tweet.addClass('tweetDiv');
+            $tweet.prependTo($body);
+          }
         }
+        renderTweets(streams.home);
+
 
         let update = true;
+        $("#updateToggle").click(()=>{ 
+          update = !update;
+          })
+
         let lastUpdate = streams.home.length;
         const renderNewTweets = ()=>{
           let currTweets = streams.home;
           if(currTweets.length > lastUpdate){
             let newTweets = currTweets.slice(lastUpdate);
-            console.log(newTweets);
+            renderTweets(newTweets);
           }
         }
-        if(update === true){
-          setInterval(renderNewTweets, 1500); //checks for new tweets every 1.5 seconds
-        }
+        setInterval(()=>{
+          if(update === true){
+            renderNewTweets();
+          }
+        }, 1500); //checks for new tweets every 1.5 seconds
+        
 
         
       });
