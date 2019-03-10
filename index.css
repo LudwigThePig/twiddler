@@ -8,12 +8,26 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 5px;
-    color: #1DA1F2;
+    color: #14171a;
+    background: #fff;
+    padding: 10px;
+}
+.leftCol{
+    display: flex;
+}
 
+.leftCol span{
+    font-size: 1.1em;
+}
+.leftCol span:hover{
+    color: #1DA1F2;
+    cursor: pointer;
+}
+.egg{
+    height: 48px;
+    width: auto;
+    float: left;
 }
 .tweetDiv p{
     margin: 0 0 5px 0;
-}
-.tweetDiv span{
-    font-size: .8em;
 }
