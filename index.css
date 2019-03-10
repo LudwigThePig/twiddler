@@ -1,7 +1,58 @@
+*{
+    margin: 0;
+}
 body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-weight: 300;
     background: #e6ecf0;
+}
+
+#header{
+    position:fixed;
+    height: 8vh;
+    width: 100vw;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+}
+#update{
+    padding-top: 12vh;
+}
+
+#left-header{
+    display: flex;
+}
+
+.fa-twitter{
+    background: #1da1f2;
+    height: 40px;
+    width: 40px;
+    border-radius: 15%;
+    color: white;
+    text-align: center;
+    vertical-align: bottom;
+}
+button{
+    background: #1da1f2;
+    border: 1px solid #1da1f2;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 16px;
+    color: white;
+}
+button:hover{
+    cursor: pointer;
+    background: #006dbf;
+    border: 1px solid #006dbf;
+
+}
+
+#update{
+    text-align: center;
+    font-size: 1.2em;
+    color: #006dbf;
 }
 
 .tweetDiv{
@@ -19,7 +70,7 @@ body {
 .leftCol span{
     font-size: 1.1em;
 }
-.leftCol span:hover{
+.leftCol span:hover, .newTweets:hover{
     color: #1DA1F2;
     cursor: pointer;
 }
