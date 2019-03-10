@@ -11,43 +11,59 @@
     <script>
 
       $(document).ready(function(){
+        //globals
         const $body = $('#body');
         $body.html('');
+        let lastUpdate = streams.home.length;
+        let update = true;
+
+
 
         const renderTweets= (array)=>{
           for (let i = 0; i<array.length; i++){
             const tweet = array[i];
             const $tweet = $('<div></div>');
-            $tweet.html(`<p>@${tweet.user}: ${tweet.message}</p>
-            <span>${tweet.created_at.toLocaleString()}</span>`);
+            $tweet.append(`<p class="message"><span class="user">@${tweet.user}:</span>${tweet.message}</p>`);
+            $tweet.append(`<span class="date">${tweet.created_at}</span>`);
             $tweet.addClass('tweetDiv');
+            $tweet.click(()=>{renderUserStream(streams.users[tweet.user])});
+            
             $tweet.prependTo($body);
           }
         }
-        renderTweets(streams.home);
 
+        const renderUserStream = (user)=>{
+          $body.html('')
+          update = false;
+          renderTweets(user);
+        }
 
-        let update = true;
+        //event listeners
         $("#updateToggle").click(()=>{ 
           update = !update;
+          if (update){
+            $("#updateToggle").text("Stop Stream");
+          } else {
+            $("#updateToggle").text("Start Stream");
+          }
           })
 
-        let lastUpdate = streams.home.length;
-        const renderNewTweets = ()=>{
+        const getNewTweets = (stream)=>{
           let currTweets = streams.home;
           if(currTweets.length > lastUpdate){
             let newTweets = currTweets.slice(lastUpdate);
             renderTweets(newTweets);
+            lastUpdate += currTweets.length - lastUpdate;
           }
         }
+
+        //initial function calls
+        renderTweets(streams.home);
         setInterval(()=>{
           if(update === true){
-            renderNewTweets();
+            getNewTweets();
           }
-        }, 1500); //checks for new tweets every 1.5 seconds
-        
-
-        
+        }, 1500);         
       });
     </script>
   </body>
