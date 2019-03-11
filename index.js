@@ -118,7 +118,7 @@ $(document).ready(function(){
     //initial function calls
     renderTweets(streams.home);
     setInterval(()=>{
-      if(update === true){
+      if(update === true && activeUser === ''){
         getNewTweets();
       } else if (activeUser !== ''){
         if (update === true){
