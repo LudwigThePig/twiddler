@@ -8,14 +8,22 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>   
+    <script>    let visitor = false;
+      </script>
     <div id="header">
     <div id="left-header">
         <i class="fa fa-twitter" style="font-size:36px"></i>
-        <h1>Twitter</h1>
+        <h1>Twiddler</h1>
     </div>
     <button id="updateToggle">Stop Stream</button>
   </div>
   <div id="update">
+  </div>
+  <div id="form">
+    <form id='addTweet'>
+      <input name='tweet' type='text'>
+      <input name='submit' type='submit'>
+    </form>
   </div>
   <div id="body"></div>
   <script src="index.js">

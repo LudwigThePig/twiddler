@@ -113,7 +113,13 @@ $(document).ready(function(){
       } else {
         $("#updateToggle").text("Start Stream");
       }
-      })
+      });
+    $("#addTweet").submit((e)=>{
+      visitor = true;
+      e.preventDefault();
+      const msg = e.target[0].value;
+      writeTweet(msg);
+    })
 
     //initial function calls
     renderTweets(streams.home);

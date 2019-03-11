@@ -34,7 +34,7 @@ body {
     text-align: center;
     vertical-align: bottom;
 }
-button{
+button, input[type=submit]{
     background: #1da1f2;
     border: 1px solid #1da1f2;
     padding: 6px 12px;
@@ -42,7 +42,7 @@ button{
     border-radius: 16px;
     color: white;
 }
-button:hover{
+button:hover, input[type=submit]:hover{
     cursor: pointer;
     background: #006dbf;
     border: 1px solid #006dbf;
