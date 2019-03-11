@@ -4,6 +4,7 @@ $(document).ready(function(){
     $body.html('');
     let lastUpdate = streams.home.length;
     let update = true;
+    let activeUser = '';
 
     //This creates a random SVG for the user's profile picture
     const randomSvgGen = ()=>{
@@ -23,7 +24,6 @@ $(document).ready(function(){
     })
 
     const renderTweets= (array)=>{
-      $body.html('');
       for (let i = 0; i<array.length; i++){
         const tweet = array[i];
         const user = array[i].user;
@@ -36,7 +36,7 @@ $(document).ready(function(){
         $tweet.append(`<span class="date">${timeAgo(tweet.created_at)}</span>`);
         $tweet.addClass('tweetDiv');
         $leftCol.addClass('leftCol');
-        $tweet.click(()=>{renderUserStream(streams.users[tweet.user])});
+        $tweet.click(()=>{renderUserStream(tweet.user)});
         
         $tweet.prependTo($body);
       }
@@ -69,26 +69,21 @@ $(document).ready(function(){
     }
 
     const renderUserStream = (user)=>{
-      $body.html('')
-      update = false;
-      renderTweets(user);
+      $body.html('');
+      activeUser = user;
+      renderTweets(streams.users[activeUser]);
     }
 
-    //event listeners
-    $("#updateToggle").click(()=>{ 
-      update = !update;
-      if (update){
-        $("#updateToggle").text("Stop Stream");
-      } else {
-        $("#updateToggle").text("Start Stream");
-      }
-      })
-
-    const getNewTweets = (stream)=>{
+    const getNewTweets = ()=>{
       let currTweets = streams.home;
       if(currTweets.length > lastUpdate){
         let newTweets = currTweets.slice(lastUpdate);
-        renderTweets(newTweets);
+        if (activeUser === ''){
+          renderTweets(newTweets);
+        } else {
+          newUserStream = newTweets.filter(x => x.activeUser);
+          renderTweets(newUserStream);
+        }
         lastUpdate += currTweets.length - lastUpdate;
       }
     }
@@ -110,11 +105,26 @@ $(document).ready(function(){
         }
     }
 
+    //event listeners
+    $("#updateToggle").click(()=>{ 
+      update = !update;
+      if (update){
+        $("#updateToggle").text("Stop Stream");
+      } else {
+        $("#updateToggle").text("Start Stream");
+      }
+      })
+
     //initial function calls
     renderTweets(streams.home);
     setInterval(()=>{
       if(update === true){
         getNewTweets();
+      } else if (activeUser !== ''){
+        if (update === true){
+          $body.html('');
+          renderTweets(streams.users[activeUser]);
+        }
       } else {
         displayUpdate();
       }
