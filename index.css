@@ -24,6 +24,14 @@ body {
 #left-header{
     display: flex;
 }
+#left-header:hover{
+    cursor: pointer;
+    color: #555;
+}
+.fa-twitter:hover{
+    background: #006dbf;
+
+}
 
 .fa-twitter{
     background: #1da1f2;

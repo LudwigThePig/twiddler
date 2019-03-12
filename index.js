@@ -106,6 +106,10 @@ $(document).ready(function(){
     }
 
     //event listeners
+    $("#left-header").click(()=>{
+      renderTweets(streams.home);
+      activeUser = '';
+    })
     $("#updateToggle").click(()=>{ 
       update = !update;
       if (update){
@@ -125,6 +129,8 @@ $(document).ready(function(){
         streams.users.SelfishShellfish.svg = randomSvgGen();
         writeTweet(msg);
       }
+      getNewTweets();
+      $("#update").html('');
     })
 
     //initial function calls
