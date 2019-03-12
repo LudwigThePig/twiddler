@@ -33,7 +33,7 @@ $(document).ready(function(){
         $leftCol.append(`<span class='user'>@${tweet.user}:</span>`);
         $leftCol.append(`<p class="message">${tweet.message}</p>`);
         $tweet.append($leftCol);
-        $tweet.append(`<span class="date">${timeAgo(tweet.created_at)}</span>`);
+        $tweet.append(`<span data-time="${tweet.created_at}" class="timestamp">${timeAgo(tweet.created_at)}</span>`);
         $tweet.addClass('tweetDiv');
         $leftCol.addClass('leftCol');
         $tweet.click(()=>{renderUserStream(tweet.user)});
@@ -104,6 +104,13 @@ $(document).ready(function(){
             })
         }
     }
+    const updateTime = ()=>{
+      const dates = $(".timestamp");
+      Array.from(document.getElementsByClassName('timestamp')).forEach( i =>{
+        const time = new Date(i.getAttribute("data-time"));
+        i.innerHTML = timeAgo(time);
+      })
+    }
 
     //event listeners
     $("#left-header").click(()=>{
@@ -136,6 +143,7 @@ $(document).ready(function(){
     //initial function calls
     renderTweets(streams.home);
     setInterval(()=>{
+      updateTime();
       if(update === true && activeUser === ''){
         getNewTweets();
       } else if (activeUser !== ''){
