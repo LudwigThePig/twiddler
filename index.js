@@ -115,10 +115,16 @@ $(document).ready(function(){
       }
       });
     $("#addTweet").submit((e)=>{
-      visitor = true;
       e.preventDefault();
+      visitor = 'SelfishShellfish';
       const msg = e.target[0].value;
-      writeTweet(msg);
+      if (streams.users.hasOwnProperty('SelfishShellfish')){
+        writeTweet(msg);
+      } else {
+        streams.users.SelfishShellfish = [];
+        streams.users.SelfishShellfish.svg = randomSvgGen();
+        writeTweet(msg);
+      }
     })
 
     //initial function calls
