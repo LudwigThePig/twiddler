@@ -9,8 +9,10 @@ This repo contains a clone of everyone's favorite microblogging platform. So far
 [Click here to see a demo](https://befitting-search.glitch.me/)
 
 ## Design Notes
-- The index.js file is contains a setInterval function at the bottom of the function that controls the all of calls the calls particular functions based on the application's state.
-- The application's state is set by two global variables, 'update' and 'activeUser'. Update determines if new tweets will be rendered to the DOM. ActiveUser determines if only a specific user's stream is going to be rendered.
+- The index.js file contains a setInterval function at the bottom of file that calls particular functions based on the application's state.
+- The application's state is set by two global variables, 'update' and 'activeUser'. 
+    - Update determines if new tweets will be rendered to the DOM. 
+    - ActiveUser determines if only a specific user's stream is going to be rendered.
 
 
 Requirements
