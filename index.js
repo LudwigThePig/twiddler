@@ -112,11 +112,21 @@ $(document).ready(function(){
       })
     }
 
+    $("textarea").keypress(()=>{
+      let $tweet = $("textarea");
+      if ($tweet.val().length > 279){
+        $("textarea").css("background", "#ffb8c2")
+        $("label").text(`${279 - $tweet.val().length} characters`);
+      } else {
+        $("label").text("Max 280 characters");
+        $("textarea").css("background", "#fff")
+      }
+    })
     //event listeners
     $("#left-header").click(()=>{
       renderTweets(streams.home);
       activeUser = '';
-    })
+    });
     $("#updateToggle").click(()=>{ 
       update = !update;
       if (update){
@@ -129,6 +139,10 @@ $(document).ready(function(){
       e.preventDefault();
       visitor = 'SelfishShellfish';
       const msg = e.target[0].value;
+      if(msg.length > 280){
+        alert('Uh oh, your tweet was longer than 280 characters.');
+        return;
+      }
       if (streams.users.hasOwnProperty('SelfishShellfish')){
         writeTweet(msg);
       } else {

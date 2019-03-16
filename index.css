@@ -63,6 +63,10 @@ button:hover, input[type=submit]:hover{
     color: #006dbf;
 }
 
+#form{
+    text-align: center;
+}
+
 .tweetDiv{
     display: flex;
     justify-content: space-between;
